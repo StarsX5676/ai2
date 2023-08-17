@@ -5,5 +5,7 @@ target_port = 80  # Port yang sesuai
 requests_per_second = 2000000  # Jumlah permintaan per detik
 duration = 10  # Durasi pengujian dalam detik
 
-command = f"ab -n {requests_per_second * duration} -c {requests_per_second} -g results.tsv http://{target_ip}:{target_port}/"
+command = "ab -n {} -c {} -g results.tsv http://{}:{}/".format(
+    requests_per_second * duration, requests_per_second, target_ip, target_port
+)
 subprocess.run(command, shell=True)
