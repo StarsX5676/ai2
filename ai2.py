@@ -8,4 +8,5 @@ duration = 10  # Durasi pengujian dalam detik
 command = "ab -n {} -c {} -g results.tsv http://{}:{}/".format(
     requests_per_second * duration, requests_per_second, target_ip, target_port
 )
-subprocess.run(command, shell=True)
+
+subprocess.call(command, shell=True)
